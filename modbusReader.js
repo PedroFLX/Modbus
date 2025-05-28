@@ -66,12 +66,23 @@ const connectClient = function()
 const readModbusData = function()
 {
     // try to read data
-    client.readHoldingRegisters (0, 5)
+    client.readHoldingRegisters (0, 4)
         .then(function(data)
         {
             mbsState   = MBS_STATE_GOOD_READ;
             mbsStatus  = "success";
-            console.log(data.buffer.toString('utf8'));            
+            console.log(data.buffer.toString('utf8'));
+            console.log(data.buffer.subarray(0, 2).readUint16BE());
+            console.log(data.buffer.subarray(2, 4).readUint16BE());
+            console.log(data.buffer.subarray(4,6).readUint16BE());
+            console.log(data.buffer.subarray(6, 8).readUint16BE());
+            console.log(data.buffer.subarray(8, 10).readUint16BE());
+            console.log(data.buffer.subarray(10, 12).readUint16BE());
+            console.log(data.buffer.subarray(12,14).readUint16BE());
+            console.log(data.buffer.subarray(14, 16).readUint16BE());
+            console.log(data.buffer.subarray(16, 18).readUint16BE());
+            console.log(data.buffer.subarray(18, 20).readUint16BE());
+                       
         })
         .catch(function(e)
         {
